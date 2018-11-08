@@ -106,10 +106,12 @@ namespace bintree {
             : value(v)
         {}
 
+        // implicit conversion to shared_ptr didn't take into account shared_from_this
+        // btw, ru.cppreference contains wrong information
         TNode(T v, TNode* left, TNode* right)
             : value(v)
-            , left(left)
-            , right(right)
+            , left(left ? left->shared_from_this() : TNodePtr{nullptr})
+            , right(right ? right->shared_from_this() : TNodePtr{nullptr})
         {}
 
         static void setParent(TNodePtr node, TNodePtr parent) {
