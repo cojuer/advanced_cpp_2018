@@ -11,7 +11,7 @@ constexpr double num_attempts = 1000000;
 
 bool is_valid_prob(double prob)
 {
-    return prob > eps && 1 - prob > eps;
+    return prob > 0 - eps && prob < 1 + eps;
 }
 
 struct RNGOptions {
